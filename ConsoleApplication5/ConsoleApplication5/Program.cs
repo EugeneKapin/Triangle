@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace ConsoleApplication5
 {
@@ -10,12 +12,9 @@ namespace ConsoleApplication5
     {
         static void Main(string[] args)
         {
-            Point point1 = new Point(2, 5);
-            Point point2 = new Point(4, 9);
-
-            Edge edge = new Edge(point1, point2);
-
-            Console.WriteLine(edge.Lenght);
+            Triangle[] trianglemass = Reader.Read("Data.txt");
+            Console.WriteLine(Average.Area(trianglemass));
+            Console.WriteLine(Average.Perimeter(trianglemass));
         }
     }
 }

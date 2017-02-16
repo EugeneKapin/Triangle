@@ -8,8 +8,8 @@ namespace ConsoleApplication5
 {
     class Edge
     {
-        Point First;
-        Point Second;
+        public readonly Point First;
+        public readonly Point Second;
         double lenght;
 
         public Edge(Point pointfirst, Point pointsecond)
