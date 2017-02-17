@@ -18,7 +18,16 @@ namespace ConsoleApplication5
             Second = pointsecond;
             CaculateEdgeLenght();
         }
-
+        public static bool operator ==(Edge a, Edge b)
+        {
+            return a.First == b.First && a.Second == b.Second ||
+                   a.First == b.Second && a.Second == b.First;
+        }
+        public static bool operator !=(Edge a, Edge b)
+        {
+            return !(a.First == b.First && a.Second == b.Second ||
+                     a.First == b.Second && a.Second == b.First);
+        }
 
         public double CaculateEdgeLenght()
         {

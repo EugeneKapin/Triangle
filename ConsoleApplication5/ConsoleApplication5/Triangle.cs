@@ -8,27 +8,21 @@ namespace ConsoleApplication5
 {
     class Triangle
     {
+        public readonly Point First;
+        public readonly Point Second;
         Edge One;
         Edge Two;
         Edge Three;
         double perimeter;
         double area;
+        bool checkIsosceles;
+        bool checkRight;
 
         public Triangle (Point pointfirst, Point pointsecond, Point pointthird)
         {
-
-            try
+            if (!Check(pointfirst, pointsecond, pointthird))
             {
-                if (!Check(pointfirst, pointsecond, pointthird))
-                {
-                    throw new TriangleNotExistException();
-                }
-
-            }
-            catch (TriangleNotExistException ex)
-            {
-                Console.WriteLine(ex.Exept);
-                System.Environment.Exit(0);
+                throw new TriangleNotExistException();
             }
 
             One = new Edge(pointfirst, pointsecond);
@@ -37,8 +31,8 @@ namespace ConsoleApplication5
 
             perimeter = Perimeter;
             area = Area;
-            CheckIsosceles();
-            CheckRight();
+            checkIsosceles = CheckIsosceles;
+            checkRight = CheckRight;
         }
 
         private static bool Check(Point pointfirst, Point pointsecond, Point pointthird)
@@ -87,16 +81,38 @@ namespace ConsoleApplication5
             }
         }
 
-        public bool CheckIsosceles()
+        public bool CheckIsosceles
         {
+            get
+            {
                 return One.Lenght == Two.Lenght || Two.Lenght == Three.Lenght || One.Lenght == Three.Lenght;
+            }
+                
         }
 
-        public bool CheckRight()
+        public bool CheckRight
         {
-                return One.Lenght == Math.Sqrt(Two.Lenght * Two.Lenght + Three.Lenght * Three.Lenght) 
+            get
+            {
+                return One.Lenght == Math.Sqrt(Two.Lenght * Two.Lenght + Three.Lenght * Three.Lenght)
                     || Two.Lenght == Math.Sqrt(One.Lenght * One.Lenght + Three.Lenght * Three.Lenght)
                     || Three.Lenght == Math.Sqrt(Two.Lenght * Two.Lenght + One.Lenght * One.Lenght);
+            }
+                
+        }
+
+        public static bool operator ==(Triangle a, Triangle b)
+        {
+            return a.One.Lenght == b.One.Lenght && a.Two.Lenght == b.Two.Lenght ||
+                   a.One.Lenght == b.Two.Lenght && a.Two.Lenght == b.One.Lenght ||
+                   a.Three.Lenght == b.Three.Lenght && a.Two.Lenght == b.Two.Lenght ||
+                   a.Three.Lenght == b.Two.Lenght && a.Two.Lenght == b.Three.Lenght ||
+                   a.One.Lenght == b.One.Lenght && a.Three.Lenght == b.Three.Lenght ||
+                   a.One.Lenght == b.Three.Lenght && a.Three.Lenght == b.One.Lenght;
+        }
+        public static bool operator !=(Triangle a, Triangle b)
+        {
+            return !(a == b);
         }
     }  
 }
