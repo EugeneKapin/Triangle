@@ -22,7 +22,7 @@ namespace ConsoleApplication5
 
         public double CaculateEdgeLenght()
         {
-            return lenght = Math.Sqrt(Math.Pow((Second.X - First.X), 2) + Math.Pow((Second.Y - First.Y), 2));
+            return lenght = Math.Sqrt(Math.Pow((First.X - Second.X), 2) + Math.Pow((First.Y - Second.Y), 2));
         }
 
         public double Lenght
